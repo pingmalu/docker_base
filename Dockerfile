@@ -33,7 +33,7 @@ RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSep
 
 RUN echo "root:passwd" | chpasswd
 
-VOLUME ["/root","/app"]
+VOLUME ["/app"]
 
 EXPOSE 22
 
