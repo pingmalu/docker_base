@@ -16,6 +16,7 @@ ADD root/ /root
 # Install packages
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server pwgen \
     build-essential g++ curl libssl-dev git subversion vim libxml2-dev byobu htop man lrzsz wget supervisor \
+    inetutils-ping \
     #压缩工具安装
     unzip p7zip p7zip-full && \
     # 用完包管理器后安排打扫卫生可以显著的减少镜像大小.
@@ -33,8 +34,9 @@ RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSep
 
 RUN echo "root:passwd" | chpasswd
 
-VOLUME ["/app"]
+VOLUME ["/app","/root"]
 
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd","-D"]
+
