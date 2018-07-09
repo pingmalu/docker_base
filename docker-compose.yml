@@ -1,0 +1,14 @@
+base:
+        image: reg.qiniu.com/malu/docker_base:master
+        ports:
+                - "11113:22"
+        volumes:
+                - /app:/app
+        container_name: base
+        hostname: base
+        command: 
+                - /bin/bash
+                - -c
+                - |
+                  cron
+                  /usr/sbin/sshd -D
