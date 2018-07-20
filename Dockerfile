@@ -25,14 +25,14 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     # */
 
-################ [sshd] ################
+################ [ssh start] ################
 RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && \
     sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && \
     sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && \
     echo "gatewayports yes" >> /etc/ssh/sshd_config && \
     sed -i 's/.*StrictHostKeyChecking.*/    StrictHostKeyChecking no/' /etc/ssh/ssh_config && \
     sed -i "s/AcceptEnv.*/#AcceptEnv\ LANG\ LC_\*/g" /etc/ssh/sshd_config
-################ [sshd] ################
+################ [ssh end] ################
 
 RUN echo "root:passwd" | chpasswd
 
